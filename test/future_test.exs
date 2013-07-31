@@ -4,7 +4,7 @@ defmodule FutureTest do
   use ExUnit.Case
 
   test "two futures" do
-    f = Future.new(fn(x) -> x end)
+    f = Future.new(fn x -> x end)
     f1 = f.(1)
     f2 = f.(2)
     assert 1 == Future.value(f1)
