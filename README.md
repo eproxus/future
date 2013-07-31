@@ -1,5 +1,7 @@
 # Future
 
+[![Build Status](https://travis-ci.org/eproxus/future.png?branch=master)](https://travis-ci.org/eproxus/future)
+
 Giving Elixir a future.
 
 ## Example
