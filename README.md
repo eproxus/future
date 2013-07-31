@@ -35,7 +35,7 @@ end
 
 ## TODO
 
-* Return error when exhausted
+* ~~Return error when exhausted~~
 * Add option to not link process
 * Handle multiple argument functions
 * Allow a future to be stopped

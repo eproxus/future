@@ -17,4 +17,12 @@ defmodule FutureTest do
     end
   end
 
+  test "exhaustion" do
+    f = Future.new(fn x -> x end).(1)
+    assert 1 == Future.value f
+    assert_raise Future.Error, "exhausted", fn ->
+      Future.value f
+    end
+  end
+
 end
