@@ -13,20 +13,20 @@ defmodule Future do
 
       receive do
         pid ->
-          pid <- {self, value}
+          pid <- { self, value }
         end
       end
     end
   end
 
-  def value(pid, timeout // :infinity, default // {:error, :timeout}) do
+  def value(pid, timeout // :infinity, default // { :error, :timeout }) do
     unless Process.alive? pid do
       raise Error, message: "exhausted"
     end
     pid <- self
     receive do
-      {^pid, {:ok, value}} -> value
-      {^pid, {:error, e}}  -> raise e
+      { ^pid, { :ok, value } } -> value
+      { ^pid, { :error, e } }  -> raise e
     after
       timeout -> default
     end
