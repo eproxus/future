@@ -2,6 +2,8 @@
 
 Adding futures to Elixir.
 
+## Example
+
 Consider the following implementations of a parallel map:
 
 Without futures:
