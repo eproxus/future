@@ -11,4 +11,10 @@ defmodule FutureTest do
     assert 2 == Future.value(f2)
   end
 
+  test "raises" do
+    assert_raise RuntimeError, "test", fn ->
+      Future.value Future.new(fn x -> raise "test" end).(1)
+    end
+  end
+
 end
