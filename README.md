@@ -1,6 +1,6 @@
 # Future
 
-Adding futures to Elixir.
+Giving Elixir a future.
 
 ## Example
 
