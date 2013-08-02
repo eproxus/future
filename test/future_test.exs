@@ -3,6 +3,8 @@ Code.require_file "test_helper.exs", __DIR__
 defmodule FutureTest do
   use ExUnit.Case
 
+  import Future
+
   test "two futures" do
     f = Future.new(fn x -> x end)
     f1 = f.(1)
@@ -22,6 +24,18 @@ defmodule FutureTest do
     assert 1 == Future.value f
     assert_raise Future.Error, "exhausted", fn ->
       Future.value f
+    end
+  end
+
+  test "a future with multiple arguments" do
+    f = Future.new(fn x, y, z -> x + y + z end)
+    f1 = f.(1, 2, 3)
+    assert 6 == Future.value(f1)
+  end
+
+  test "calling a future with a non function value raises an error" do
+    assert_raise Future.Error, fn ->
+      Future.new(10)
     end
   end
 
