@@ -3,11 +3,11 @@ defmodule Future do
   defexception Error, message: nil
 
   defmacro new(fun) do
-    wrap_fun(fun)
+    wrap_fun(fun, arity_of(fun))
   end
 
-  defp wrap_fun({ :fn, _, [[do: { :->, _, [{ args, _, _ }] }]] } = fun) do
-    args = Enum.map(1..Enum.count(args), fn x -> { :"x#{x}", [], nil } end)
+  defp wrap_fun(fun, arity) do
+    args = Enum.map(1..arity, fn x -> { :"x#{x}", [], nil } end)
 
     quote do
       fn(unquote_splicing(args)) ->
@@ -27,10 +27,16 @@ defmodule Future do
     end
   end
 
-  defp wrap_fun(_) do
-    quote do
-      raise Error, message: "Future.new/1 only takes an anonymous function as an argument."
-    end
+  defp arity_of({ :fn, _, [[do: { :->, _, [{ args, _, _ }] }]] }) do
+    Enum.count(args)
+  end
+
+  defp arity_of({ :function, _, [{ :/, _, [_, arity] }] }) do
+    arity
+  end
+
+  defp arity_of(_) do
+    raise Error, message: "Future.new/1 only takes functions as an argument."
   end
 
   def value(pid, timeout // :infinity, default // { :error, :timeout }) do
