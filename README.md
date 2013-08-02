@@ -39,6 +39,6 @@ end
 
 * ~~Return error when exhausted~~
 * Add option to not link process
-* Handle multiple argument functions
+* ~~Handle multiple argument functions~~
 * Allow a future to be stopped
 
