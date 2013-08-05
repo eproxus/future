@@ -44,6 +44,12 @@ defmodule FutureTest do
     assert 3 == Future.value(f1)
   end
 
+  test "a future with a &function argument" do
+    f = Future.new(&addition/2)
+    f1 = f.(1,2)
+    assert 3 == Future.value(f1)
+  end
+
   test "calling a future with a non function value raises an error" do
     assert_compile_fail Future.Error, "import Future; Future.new(10)"
   end
