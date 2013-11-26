@@ -4,7 +4,6 @@ defmodule Future.Mixfile do
   def project do
     [ app: :future,
       version: "0.0.1",
-      elixir: "~> 0.10.0",
       deps: deps ]
   end
 

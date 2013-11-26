@@ -35,7 +35,8 @@ defmodule Future do
     arity
   end
 
-  defp arity_of(_) do
+  defp arity_of(args) do
+    IO.puts "Got #{inspect args}"
     raise Error, message: "Future.new/1 only takes functions as an argument."
   end
 

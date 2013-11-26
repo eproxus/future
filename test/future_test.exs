@@ -2,7 +2,7 @@ Code.require_file "test_helper.exs", __DIR__
 
 defmodule FutureTest do
   use ExUnit.Case
-  import CompileAssertion
+#  import CompileAssertion
 
   import Future
 
