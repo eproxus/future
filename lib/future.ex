@@ -27,7 +27,7 @@ defmodule Future do
     end
   end
 
-  defp arity_of({ :fn, _, [[do: { :->, _, [{ args, _, _ }] }]] }) do
+  defp arity_of({ :fn, _, [ { :->, _, [{ args, _, _ }] }] }) do
     Enum.count(args)
   end
 
@@ -35,8 +35,7 @@ defmodule Future do
     arity
   end
 
-  defp arity_of(args) do
-    IO.puts "Got #{inspect args}"
+  defp arity_of(_) do
     raise Error, message: "Future.new/1 only takes functions as an argument."
   end
 
