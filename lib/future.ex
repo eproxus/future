@@ -27,7 +27,7 @@ defmodule Future do
     end
   end
 
-  defp arity_of({ :fn, _, [[do: { :->, _, [{ args, _, _ }] }]] }) do
+  defp arity_of({ :fn, _, [ { :->, _, [{ args, _, _ }] }] }) do
     Enum.count(args)
   end
 

@@ -9,6 +9,9 @@ Giving Elixir a future.
 Consider the following implementations of a parallel map:
 
 Without futures:
+
+
+
 ```Elixir
 def pmap(collection, fun) do
   me = self
@@ -27,6 +30,9 @@ end
 ```
 
 With futures:
+
+
+
 ```Elixir
 def pmap(collection, fun) do
   collection

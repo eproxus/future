@@ -4,7 +4,7 @@ defmodule FutureTest do
   use ExUnit.Case
   import CompileAssertion
 
-  import Future
+  require Future
 
   test "two futures" do
     f = Future.new(fn x -> x end)
@@ -36,12 +36,6 @@ defmodule FutureTest do
 
   def addition(x,y) do
     x + y
-  end
-
-  test "a future with a function as a argument" do
-    f = Future.new(function(addition/2))
-    f1 = f.(1,2)
-    assert 3 == Future.value(f1)
   end
 
   test "a future with a &function argument" do
