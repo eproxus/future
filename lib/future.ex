@@ -7,13 +7,13 @@ defmodule Future do
   end
 
   defp wrap_fun(fun, arity) do
-    args = Enum.map(1..arity, fn x -> { :"x#{x}", [], nil } end)
+    args = init_args(arity)
 
     quote do
       fn(unquote_splicing(args)) ->
         spawn_link fn ->
           value = try do
-            { :ok, unquote(fun).(unquote_splicing(args)) }
+            { :ok, unquote(call_fun(fun, args)) }
         rescue
           e -> { :error, e }
         end
@@ -37,6 +37,19 @@ defmodule Future do
 
   defp arity_of(_) do
     raise Error, message: "Future.new/1 only takes functions as an argument."
+  end
+
+  defp init_args(0), do: []
+  defp init_args(arity) do
+    Enum.map(1..arity, fn x -> { :"x#{x}", [], nil } end)
+  end
+
+  defp call_fun(fun, []) do
+    quote do unquote(fun).() end
+  end
+
+  defp call_fun(fun, args) do
+    quote do unquote(fun).(unquote_splicing(args)) end
   end
 
   def value(pid, timeout // :infinity, default // { :error, :timeout }) do
