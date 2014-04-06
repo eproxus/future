@@ -52,7 +52,7 @@ defmodule Future do
     quote do unquote(fun).(unquote_splicing(args)) end
   end
 
-  def value(pid, timeout // :infinity, default // { :error, :timeout }) do
+  def value(pid, timeout \\ :infinity, default \\ { :error, :timeout }) do
     unless Process.alive? pid do
       raise Error, message: "exhausted"
     end
